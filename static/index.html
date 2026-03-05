@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="bo" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>བོད་ཡིག་ཡིག་ནོར་བརྟག་དཔྱད།</title>
+  <style>
+    @font-face {
+      font-family: 'Qomolangma';
+      src: url('/fonts/Qomolangma-UchenSarchung.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #f9f9f9;
+      --bg-elevated: #ffffff;
+      --text: #1a1a1a;
+      --text-secondary: #6e6e80;
+      --text-tertiary: #8e8ea0;
+      --border: #e5e5e5;
+      --border-focus: #10a37f;
+      --accent: #10a37f;
+      --accent-hover: #0d8a6a;
+      --error: #ef4444;
+      --error-bg: #fef2f2;
+      --success: #22c55e;
+      --success-bg: #f0fdf4;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Qomolangma', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    h1 {
+      font-family: 'Qomolangma', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .input-section {
+      background: var(--bg-elevated);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 160px;
+      padding: 1rem 1rem;
+      font-family: 'Qomolangma', sans-serif;
+      font-size: 1.15rem;
+      line-height: 2.2;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      resize: vertical;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    textarea:hover {
+      border-color: var(--text-tertiary);
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 2px rgba(16, 163, 127, 0.15);
+    }
+
+    textarea::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.5rem 1.25rem;
+      font-family: 'Qomolangma', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .btn:active {
+      opacity: 0.9;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .status {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-left: auto;
+    }
+
+    .status.error {
+      color: var(--error);
+    }
+
+    .status.success {
+      color: var(--success);
+    }
+
+    .result-section {
+      background: var(--bg-elevated);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .result-section h2 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+      text-transform: none;
+    }
+
+    .result-text {
+      font-family: 'Qomolangma', sans-serif;
+      font-size: 1.15rem;
+      line-height: 2.2;
+      padding: 1rem;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      min-height: 60px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      border: 1px solid transparent;
+    }
+
+    .result-text .syllable {
+      padding: 0 1px;
+      border-radius: 2px;
+    }
+
+    .result-text .syllable.error {
+      background: var(--error-bg);
+      color: var(--error);
+    }
+
+    .result-text .tsheg {
+      color: var(--text-tertiary);
+    }
+
+    .legend {
+      display: flex;
+      gap: 1.25rem;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    .legend-dot.error {
+      background: var(--error);
+    }
+
+    .legend-dot.ok {
+      background: var(--success);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>བོད་ཡིག་ཡིག་ནོར་བརྟག་དཔྱད།</h1>
+      <p class="subtitle">གསེར་ལྡན་དཔེ་རྙིང་བསྡུ་སྒྲིག་ལས་ཁུངས་ནས་བཟོས།།</p>
+    </header>
+
+    <div class="input-section">
+      <textarea
+        id="inputText"
+        placeholder="བཀྲ་ཤིས་བདེ་ལེགས། ལྟ་བུའི་བོད་ཡིག་འཇོག་རོགས།"
+        autofocus
+      ></textarea>
+      <div class="actions">
+        <button class="btn btn-primary" id="checkBtn">བརྟག་དཔྱད།</button>
+        <button class="btn btn-secondary" id="clearBtn">ཡང་བསྐྱར།</button>
+        <span class="status" id="status"></span>
+      </div>
+    </div>
+
+    <div class="result-section hidden" id="resultSection">
+      <h2>འབྲས་བུ།</h2>
+      <div class="result-text" id="resultText"></div>
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot error"></div>
+          <span>ཚིག་ནོར།</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot ok"></div>
+          <span>འགྲིག་པ།</span>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        <a href="https://github.com/khangey/tibetan-spellchecker" target="_blank">tibetan-spellchecker</a>
+        ཁུངས་གཞི། CC0 ཁྲབ་སྤྱོད།
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    const TSHEG = '\u0f0b';
+    const inputText = document.getElementById('inputText');
+    const checkBtn = document.getElementById('checkBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const statusEl = document.getElementById('status');
+    const resultSection = document.getElementById('resultSection');
+    const resultText = document.getElementById('resultText');
+
+    const T = {
+      empty: 'བོད་ཡིག་འཇོག་རོགས།',
+      checking: 'བརྟག་དཔྱད་བྱེད་བཞིན།',
+      noError: 'ཚིག་ནོར་མ་རྙེད།',
+      hasError: (n) => `ཚིག་ནོར་ ${n} ཡོད།`,
+      failed: 'བརྟག་དཔྱད་ཚབས་ཆེར་མ་འགྲུབ།',
+      noSyllable: 'ཚིག་མེད།'
+    };
+
+    async function checkSpell() {
+      const text = inputText.value.trim();
+      if (!text) {
+        statusEl.textContent = T.empty;
+        statusEl.className = 'status error';
+        return;
+      }
+
+      checkBtn.classList.add('loading');
+      statusEl.textContent = T.checking;
+      statusEl.className = 'status';
+
+      try {
+        const res = await fetch('/api/spellcheck', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text })
+        });
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.detail || T.failed);
+
+        renderResult(data);
+        resultSection.classList.remove('hidden');
+
+        if (data.error_count === 0) {
+          statusEl.textContent = T.noError;
+          statusEl.className = 'status success';
+        } else {
+          statusEl.textContent = T.hasError(data.error_count);
+          statusEl.className = 'status error';
+        }
+      } catch (err) {
+        statusEl.textContent = err.message || T.failed;
+        statusEl.className = 'status error';
+      } finally {
+        checkBtn.classList.remove('loading');
+      }
+    }
+
+    function renderResult(data) {
+      const { text, results } = data;
+      const resultMap = {};
+      results.forEach(r => {
+        resultMap[r.start] = r;
+      });
+
+      let html = '';
+      let i = 0;
+      while (i < text.length) {
+        const r = resultMap[i];
+        if (r) {
+          const cls = r.valid ? '' : 'error';
+          html += `<span class="syllable ${cls}">${escapeHtml(r.syllable)}</span>`;
+          i = r.end;
+        } else {
+          const ch = text[i];
+          if (ch === TSHEG) {
+            html += `<span class="tsheg">${escapeHtml(ch)}</span>`;
+          } else {
+            html += escapeHtml(ch);
+          }
+          i++;
+        }
+      }
+      resultText.innerHTML = html || `<span class="text-muted">${T.noSyllable}</span>`;
+    }
+
+    function escapeHtml(s) {
+      const div = document.createElement('div');
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    function clearAll() {
+      inputText.value = '';
+      resultSection.classList.add('hidden');
+      statusEl.textContent = '';
+      statusEl.className = 'status';
+      inputText.focus();
+    }
+
+    checkBtn.addEventListener('click', checkSpell);
+    clearBtn.addEventListener('click', clearAll);
+
+    inputText.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'Enter') checkSpell();
+    });
+  </script>
+</body>
+</html>

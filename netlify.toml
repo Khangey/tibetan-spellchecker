@@ -1,0 +1,13 @@
+[build]
+  publish = "static"
+  functions = "netlify/functions"
+
+[functions]
+  # 将词典文件打包进函数
+  included_files = ["syllables/*"]
+
+# 将 /api 请求转发到 serverless 函数
+[[redirects]]
+  from = "/api/spellcheck"
+  to = "/.netlify/functions/spellcheck"
+  status = 200
